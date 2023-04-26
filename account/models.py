@@ -26,7 +26,7 @@ class UserManager(BaseUserManager):
         kwargs['is_staff'] = True #даем права суперадмина
         #kwargs - в виде словаря хотим показать это
         kwargs['is_superuser'] = True
-        kwargs['is_activate'] = True
+        kwargs['is_active'] = True
         email = self.normalize_email(email)
         #normalize_email - он по факту приводит нашу почту в нормальный формат
         user = self.model(email=email, phone=phone, **kwargs)
