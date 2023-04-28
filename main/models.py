@@ -12,3 +12,14 @@ class Product(models.Model):
     #decimal_places - показывает сколько символов после точки
     description = models.TextField()
     quantity = models.IntegerField()
+
+    @property
+    def average_rating(self):
+        ratings = self.ratings.all() #так как ratings связан с продуктом через fk, то можем ссылаться на их related name
+        if ratings.exists():
+            return sum([x.value for x in ratings]) // ratings.count()
+            #ищем среднее значение рейтинга
+        return 0
+
+
+
