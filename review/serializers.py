@@ -14,6 +14,7 @@ class CommentSerializer(ModelSerializer):
         return attrs
 
     def to_representation(self, instance):
+        #хотим внести доп инфу в блок user
         rep = super().to_representation(instance)
         rep['user'] = {
             'id': instance.user.id,
@@ -51,4 +52,4 @@ class FavoriteSerializer(ModelSerializer):
 
         rep = super().to_representation(instance)
         rep['product'] = ProductSerializer(instance.product).data
-        return  rep #????????????????????
+        return  rep

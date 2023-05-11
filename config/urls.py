@@ -21,7 +21,7 @@ from drf_yasg.views import get_schema_view
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Python 23 API",
+        title="Python 27 API",
         description="makers bootcamp",
         default_version="v1",
     ),

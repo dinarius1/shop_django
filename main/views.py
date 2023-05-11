@@ -9,9 +9,9 @@ from .serializers import CategorySerializer, ProductSerializer
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # filter_backends = (SearchFilter, DjangoFilterBackend,) #поделючение фильтра?
-    # filterset_fields = ('category',)
-    # search_fields = ('title', 'description')
+    filter_backends = (SearchFilter, DjangoFilterBackend,) #поделючение фильтра?
+    filterset_fields = ('category',)
+    search_fields = ('title', 'description')
 
 class CategoryListCreateAPIView(ListCreateAPIView):
     queryset = Category.objects.all()
