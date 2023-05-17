@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
-from .utils import send_activation_code
+from .tasks import send_activation_code
+
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -18,7 +19,9 @@ class UserManager(BaseUserManager):
         # так как наш класс User написан ниже класса Менеджера
         user.set_password(password) #хеширование пароля
         user.create_activation_code()  # генерируем активац. код
-        send_activation_code(user.email, user.activation_code) #отправляем на почту
+        send_activation_code.delay(user.email, user.activation_code)
+        #отправляем на почту
+        #delay - позволяет переедать задачу от джанго cellary
         user.save(using=self._db) #сохраняет наши данные в бд, а именно self._db,
         # поэтому нужно добавлять using
         Billing.objects.create(user=user) #так как эта функция, то она работает только тогда, когда мы ее вызовем

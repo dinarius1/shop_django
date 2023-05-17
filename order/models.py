@@ -14,7 +14,7 @@ class Order(models.Model):
         items = self.items.all()
         # в данном случае мы ссылаемся на related_name='items', так как поля order
         # не существует, мы лишь ссылаемся на него. Благоларя related_name мы как раз можем сслыалатьс на него
-        if items.exist():
+        if items.exists():
             return sum([item.product.price * item.quantity for item in items])
         return 0
 
