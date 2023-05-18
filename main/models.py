@@ -12,6 +12,8 @@ class Product(models.Model):
     #decimal_places - показывает сколько символов после точки
     description = models.TextField()
     quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
     @property
     def average_rating(self):
